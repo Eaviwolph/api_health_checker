@@ -1,0 +1,110 @@
+.healthCheckListItem-list-item {
+    display: block;
+    margin: 12px 0;
+    padding: 16px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Health status styling */
+.healthCheckListItem-list-item.healthy {
+    border-color: #22c55e;
+    background-color: #f0fdf4;
+}
+
+.healthCheckListItem-list-item.unhealthy {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+.healthCheckListItem-list-item.unknown {
+    border-color: #94a3b8;
+    background-color: #f8fafc;
+}
+
+/* Header section */
+.healthCheckListItem-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.healthCheckListItem-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.healthCheckListItem-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.delete-button {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.refresh-button {
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.history-button {
+    background-color: #22c0c5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Details section */
+.healthCheckListItem-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.healthCheckListItem-field {
+    font-size: 14px;
+    color: #374151;
+    word-break: break-all;
+}
+
+.label {
+    font-weight: 600;
+    color: #374151;
+}
