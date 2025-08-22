@@ -1,0 +1,21 @@
+#!/bin/sh
+# vim:sw=4:ts=4:et
+
+set -e
+
+if [ -z ${POSTGRES_DB+x} ]; then
+    echo "SQLite will be used.";
+else
+    wait-for-it -s "$POSTGRES_HOST:$POSTGRES_PORT" -t 60
+fi
+
+# Create migrations for the endpoints app
+echo "Creating migrations for endpoints app..."
+python manage.py makemigrations endpoints
+
+# Apply all migrations
+echo "Applying all migrations..."
+python manage.py migrate --noinput
+
+# Execute the passed command (like runserver)
+exec "$@"
