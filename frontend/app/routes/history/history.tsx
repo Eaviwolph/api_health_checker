@@ -3,9 +3,11 @@ import { useParams } from "react-router";
 
 import "./history.css";
 
-import type { Endpoint, HealthCheck } from "~/components/types";
-import { requester } from "~/components/requester";
+import type { Endpoint, HealthCheck } from "~/components/tools/types";
+import { requester } from "~/components/tools/requester";
 import { HealthCheckListItem } from "~/components/healthCheckListItem/healthCheckListItem";
+import { EndpointListItem } from "~/components/endpointListItem/endpointListItem";
+import { ButtonVariant, UiButton } from "~/components/uiButton/uiButton";
 
 export default function History() {
   const { id: endpointId } = useParams();
@@ -33,15 +35,22 @@ export default function History() {
       <div className="history-header">
         <div className="history-title">
           <h1>API Endpoint History</h1>
-          <h2>Showing history for endpoint: {endpoint?.name}</h2>
+          <div className="history-endpoint">
+            {endpoint && (
+              <EndpointListItem
+                endpoint={endpoint}
+                onDelete={null}
+                onRefreshStatus={null}
+                onViewHistory={null}
+              />
+            )}
+          </div>
         </div>
-        <button
-          className="btn btn-back"
-          onClick={() => window.location.href = "/"}
-          title="Back to endpoints"
-        >
-          Back
-        </button>
+        <UiButton
+          text="Back"
+          variant={ButtonVariant.White}
+          onClick={() => (window.location.href = "/")}
+        />
       </div>
       {history.map((history) => (
         <HealthCheckListItem

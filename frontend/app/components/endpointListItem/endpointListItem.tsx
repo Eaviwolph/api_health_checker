@@ -2,13 +2,16 @@ import React from "react";
 
 import "./endpointListItem.css";
 
-import type { Endpoint } from "../types";
+import type { Endpoint } from "../tools/types";
+
+import { parseDurationToMs } from "../tools/utils";
+import { ButtonVariant, UiButton } from "../uiButton/uiButton";
 
 export function EndpointListItem(props: {
   endpoint: Endpoint;
-  onDelete: (endpointId: string) => void;
-  onRefreshStatus: (endpointId: string) => void;
-  onViewHistory: (endpointId: string) => void;
+  onDelete?: (endpointId: string) => void;
+  onRefreshStatus?: (endpointId: string) => void;
+  onViewHistory?: (endpointId: string) => void;
 }) {
   const { endpoint, onDelete, onRefreshStatus, onViewHistory } = props;
 
@@ -17,35 +20,35 @@ export function EndpointListItem(props: {
     endpoint.is_healthy === true
       ? "healthy"
       : endpoint.is_healthy === false
-        ? "unhealthy"
-        : "unknown";
+      ? "unhealthy"
+      : "unknown";
 
   return (
     <div className={`endpoint-list-item ${healthClass}`}>
       <div className="endpoint-header">
         <div className="endpoint-name">{endpoint.name}</div>
         <div className="endpoint-actions">
-          <button
-            className="delete-button"
-            onClick={() => onDelete(endpoint.id)}
-            title="Delete endpoint"
-          >
-            Delete
-          </button>
-          <button
-            className="refresh-button"
-            onClick={() => onRefreshStatus(endpoint.id)}
-            title="Refresh endpoint status"
-          >
-            Refresh Status
-          </button>
-            <button
-              className="history-button"
+          {onDelete && (
+            <UiButton
+              text="Delete"
+              variant={ButtonVariant.Red}
+              onClick={() => onDelete(endpoint.id)}
+            />
+          )}
+          {onRefreshStatus && (
+            <UiButton
+              text="Refresh Status"
+              variant={ButtonVariant.Green}
+              onClick={() => onRefreshStatus(endpoint.id)}
+            />
+          )}
+          {onViewHistory && (
+            <UiButton
+              text="History"
+              variant={ButtonVariant.Blue}
               onClick={() => onViewHistory(endpoint.id)}
-              title="Get endpoint history"
-            >
-              History
-            </button>
+            />
+          )}
         </div>
       </div>
       <div className="endpoint-details">
@@ -70,12 +73,18 @@ export function EndpointListItem(props: {
             : "Unknown"}
         </div>
         <div className="endpoint-field">
+          <span className="label">Last Response Time:</span>{" "}
+          {endpoint.last_response_time
+            ? `${parseDurationToMs(endpoint.last_response_time)} ms`
+            : "Unknown"}
+        </div>
+        <div className="endpoint-field">
           <span className="label">Is Healthy:</span>{" "}
           {endpoint.is_healthy === true
             ? "Yes"
             : endpoint.is_healthy === false
-              ? "No"
-              : "Unknown"}
+            ? "No"
+            : "Unknown"}
         </div>
       </div>
     </div>

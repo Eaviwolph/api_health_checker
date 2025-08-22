@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:24.6.0-alpine3.22
 
 EXPOSE 3000
 EXPOSE 5173

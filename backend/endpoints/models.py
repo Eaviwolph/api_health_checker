@@ -24,6 +24,7 @@ class Endpoint(models.Model):
     expected_status = models.IntegerField()
     last_check = models.DateTimeField(null=True, blank=True)
     last_status = models.IntegerField(null=True, blank=True)
+    last_response_time = models.DurationField(null=True, blank=True)
     is_healthy = models.BooleanField(null=True, blank=True)
 
     def __serialize__(self):
@@ -35,11 +36,13 @@ class Endpoint(models.Model):
             "expected_status": self.expected_status,
             "last_check": self.last_check,
             "last_status": self.last_status,
+            "last_response_time": self.last_response_time,
             "is_healthy": self.is_healthy
         }
 
     def check_endpoint(self):
         try:
+            start_time = timezone.now()
             response = requests.request(
                 method=self.method,
                 url=self.url,
@@ -48,6 +51,7 @@ class Endpoint(models.Model):
             self.last_check = timezone.now()
             self.last_status = response.status_code
             self.is_healthy = (response.status_code == self.expected_status)
+            self.last_response_time = timezone.now() - start_time
             self.save()
         except requests.RequestException:
             self.last_check = timezone.now()
@@ -56,17 +60,20 @@ class Endpoint(models.Model):
             self.save()
         HealthCheck.objects.create(
             endpoint=self,
-            status=self.last_status
+            status=self.last_status,
+            response_time=self.last_response_time
         )
 
 class HealthCheck(models.Model):
     endpoint = models.ForeignKey(Endpoint, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(null=True, blank=True)
+    response_time = models.DurationField(null=True, blank=True)
 
     def __serialize__(self):
         return {
             "id": str(self.id),
             "timestamp": self.timestamp,
             "status": self.status,
+            "response_time": self.response_time
         }

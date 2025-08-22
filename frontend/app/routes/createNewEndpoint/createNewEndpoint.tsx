@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
 import "./createNewEndpoint.css";
-import { requester } from "../../components/requester";
+import { requester } from "../../components/tools/requester";
+import { ButtonVariant, UiButton } from "~/components/uiButton/uiButton";
 
 type CreateEndpointFormData = {
   name: string;
@@ -151,21 +152,18 @@ export default function CreateNewEndpoint() {
         </div>
 
         <div className="form-actions">
-          <button
-            type="button"
+          <UiButton
+            text="Cancel"
+            variant={ButtonVariant.White}
             onClick={() => navigate("/")}
-            className="btn btn-secondary"
             disabled={isSubmitting}
-          >
-            Cancel
-          </button>
-          <button
+          />
+          <UiButton
+            text={isSubmitting ? "Creating..." : "Create Endpoint"}
+            variant={ButtonVariant.Blue}
             type="submit"
-            className="btn btn-primary"
             disabled={isSubmitting}
-          >
-            {isSubmitting ? "Creating..." : "Create Endpoint"}
-          </button>
+          />
         </div>
       </form>
     </div>

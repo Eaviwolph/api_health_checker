@@ -2,7 +2,9 @@ import React from "react";
 
 import "./healthCheckListItem.css";
 
-import type { Endpoint, HealthCheck } from "../types";
+import type { Endpoint, HealthCheck } from "../tools/types";
+
+import { parseDurationToMs } from "../tools/utils";
 
 export function HealthCheckListItem(props: {
   endpoint: Endpoint | null;
@@ -15,10 +17,9 @@ export function HealthCheckListItem(props: {
     healthCheck.status === undefined || healthCheck.status === null
       ? "unknown"
       : healthCheck.status === endpoint?.expected_status
-        ? "healthy"
-        : "unhealthy";
+      ? "healthy"
+      : "unhealthy";
 
-  console.log(healthCheck);
   return (
     <div className={`healthCheck-list-item ${healthClass}`}>
       <div className="healthCheck-field">
@@ -29,6 +30,12 @@ export function HealthCheckListItem(props: {
         <span className="label">Timestamp:</span>{" "}
         {healthCheck.timestamp
           ? new Date(healthCheck.timestamp).toLocaleString()
+          : "Unknown"}
+      </div>
+      <div className="healthCheck-field">
+        <span className="label">Response Time:</span>{" "}
+        {healthCheck.response_time
+          ? `${parseDurationToMs(healthCheck.response_time)} ms`
           : "Unknown"}
       </div>
     </div>

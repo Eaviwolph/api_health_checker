@@ -6,6 +6,7 @@ export type Endpoint = {
   expected_status: number;
   last_check: string;
   last_status: number;
+  last_response_time: string;
   is_healthy: boolean;
 };
 

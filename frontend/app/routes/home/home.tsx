@@ -2,10 +2,11 @@ import React from "react";
 
 import "./home.css";
 
-import type { Endpoint } from "~/components/types";
-import { requester } from "~/components/requester";
+import type { Endpoint } from "~/components/tools/types";
+import { requester } from "~/components/tools/requester";
 
 import { EndpointListItem } from "~/components/endpointListItem/endpointListItem";
+import { ButtonVariant, UiButton } from "~/components/uiButton/uiButton";
 
 export default function Home() {
   const [endpoints, setEndpoints] = React.useState<Endpoint[]>([]);
@@ -49,13 +50,11 @@ export default function Home() {
   return (
     <div>
       <h1>API Endpoints</h1>
-      <button
-        className="create-button"
-        onClick={() => window.location.href = "/create"}
-        title="Create new endpoint"
-      >
-        Create Endpoint
-      </button>
+      <UiButton
+        text="Create Endpoint"
+        variant={ButtonVariant.Green}
+        onClick={() => (window.location.href = "/create")}
+      />
       <div className="endpoint-list">
         {endpoints.map((endpoint) => (
           <EndpointListItem

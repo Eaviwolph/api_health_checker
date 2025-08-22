@@ -28,6 +28,7 @@ def endpoint(request):
             expected_status=data["expected_status"],
             last_check=None,
             last_status=None,
+            last_response_time=None,
             is_healthy=None
         )
 
