@@ -19,6 +19,10 @@ A full-stack application for monitoring the health status of web endpoints in re
 git clone git@github.com:Eaviwolph/api_health_checker.git
 cd api_health_checker
 
+# Frontend needs .env to reference Backend API
+# If you do not do not have specic hosting changes, just copy the template
+# cp frontend/.env.template frontend/.env
+
 # Start with Docker
 docker compose up
 
