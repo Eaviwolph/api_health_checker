@@ -9,10 +9,6 @@ else
     wait-for-it -s "$POSTGRES_HOST:$POSTGRES_PORT" -t 60
 fi
 
-# Create migrations for the endpoints app
-echo "Creating migrations for endpoints app..."
-python manage.py makemigrations endpoints
-
 # Apply all migrations
 echo "Applying all migrations..."
 python manage.py migrate --noinput
