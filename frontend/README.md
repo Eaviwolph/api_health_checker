@@ -16,7 +16,7 @@ A modern, production-ready template for building full-stack React applications u
 
 ## Getting Started
 
-### Installation
+### Manual installation (Not recommended)
 
 Install the dependencies:
 
@@ -44,25 +44,11 @@ npm run build
 
 ## Deployment
 
-### Docker Deployment
-
-To build and run using Docker:
-
+**Environment Variables:**
 ```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+# Create .env file
+VITE_API_BASE_URL=http://localhost:8000
 ```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
 
 ### DIY Deployment
 
