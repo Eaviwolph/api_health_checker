@@ -49,7 +49,7 @@ A Django REST API for monitoring the health status of web endpoints. This backen
 ## Manual installation (Not recommended)
 
 ### Prerequisites
-- Python 3.8+
+- Python 3.11+
 - pip
 
 1. **Navigate to the backend directory**
@@ -123,5 +123,8 @@ curl http://localhost:8000/api/endpoints/{endpoint-id}/history/
 Cron task is configurable via the `settings.py` file.
 
 Default:
-- CRON_TASK_MAX_WORKERS = 5
-- CRON_TASK_WAIT_TIME = 30
+```python
+CRON_TASK_MAX_WORKERS = 5
+# Time in seconds between each cron job execution
+CRON_TASK_WAIT_TIME = 30
+```

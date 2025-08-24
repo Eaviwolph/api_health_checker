@@ -21,7 +21,7 @@ cd api_health_checker
 
 # Frontend needs .env to reference Backend API
 # If you do not do not have specic hosting changes, just copy the template
-# cp frontend/.env.template frontend/.env
+cp frontend/.env.template frontend/.env
 
 # Start with Docker
 docker compose up

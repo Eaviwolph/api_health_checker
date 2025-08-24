@@ -136,6 +136,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CRON_TASK_MAX_WORKERS = 5
+# Time in seconds between each cron job execution
 CRON_TASK_WAIT_TIME = 30
 
 # Logging configuration
